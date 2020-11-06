@@ -11,7 +11,7 @@ cd lins/docker
 
 ## Run
 
-On the host:
+### On host:
 ```bash
 roscore
 ```
@@ -28,7 +28,7 @@ rosbag play --clock lidar_imu_dataset.bag
 lidar_imu_dataset.bag: https://drive.google.com/file/d/19UUcO77L-g-RsZd_SLyr6O39S2JXJtiK/view?usp=drive_web
 
 
-On the docker image:
+### On docker image:
 ```bash
 cd lins/docker
 ./run.sh
