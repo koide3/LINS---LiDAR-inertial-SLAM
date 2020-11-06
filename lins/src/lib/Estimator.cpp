@@ -178,17 +178,17 @@ void LinsFusion::publishTopics() {
   if (pubLaserCloudCornerLast.getNumSubscribers() != 0) {
     publishCloudMsg(pubLaserCloudCornerLast,
                     estimator->scan_last_->cornerPointsLessSharpYZX_,
-                    ros::Time().fromSec(scan_time_), "/camera");
+                    ros::Time().fromSec(scan_time_), "camera");
   }
   if (pubLaserCloudSurfLast.getNumSubscribers() != 0) {
     publishCloudMsg(pubLaserCloudSurfLast,
                     estimator->scan_last_->surfPointsLessFlatYZX_,
-                    ros::Time().fromSec(scan_time_), "/camera");
+                    ros::Time().fromSec(scan_time_), "camera");
   }
   if (pubOutlierCloudLast.getNumSubscribers() != 0) {
     publishCloudMsg(pubOutlierCloudLast,
                     estimator->scan_last_->outlierPointCloudYZX_,
-                    ros::Time().fromSec(scan_time_), "/camera");
+                    ros::Time().fromSec(scan_time_), "camera");
   }
 
   // Publish the estimated 6-DOF odometry by a YZX-frame convention (e.g. camera
@@ -292,8 +292,8 @@ void LinsFusion::alignIMUtoVehicle(const V3D& rpy, const V3D& acc_in,
 }
 
 void LinsFusion::publishOdometryYZX(double timeStamp) {
-  laserOdometry.header.frame_id = "/camera_init";
-  laserOdometry.child_frame_id = "/laser_odom";
+  laserOdometry.header.frame_id = "camera_init";
+  laserOdometry.child_frame_id = "laser_odom";
   laserOdometry.header.stamp = ros::Time().fromSec(timeStamp);
   laserOdometry.pose.pose.orientation.x = estimator->globalStateYZX_.qbn_.x();
   laserOdometry.pose.pose.orientation.y = estimator->globalStateYZX_.qbn_.y();
@@ -306,8 +306,8 @@ void LinsFusion::publishOdometryYZX(double timeStamp) {
 
   tf::TransformBroadcaster tfBroadcaster;
   tf::StampedTransform laserOdometryTrans;
-  laserOdometryTrans.frame_id_ = "/camera_init";
-  laserOdometryTrans.child_frame_id_ = "/laser_odom";
+  laserOdometryTrans.frame_id_ = "camera_init";
+  laserOdometryTrans.child_frame_id_ = "laser_odom";
   laserOdometryTrans.stamp_ = ros::Time().fromSec(timeStamp);
   laserOdometryTrans.setRotation(tf::Quaternion(
       estimator->globalStateYZX_.qbn_.x(), estimator->globalStateYZX_.qbn_.y(),

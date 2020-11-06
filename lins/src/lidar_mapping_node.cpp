@@ -290,14 +290,14 @@ class MappingHandler {
     downSizeFilterGlobalMapKeyPoses.setLeafSize(1.0, 1.0, 1.0);
     downSizeFilterGlobalMapKeyFrames.setLeafSize(0.4, 0.4, 0.4);
 
-    odomAftMapped.header.frame_id = "/camera_init";
-    odomAftMapped.child_frame_id = "/aft_mapped";
+    odomAftMapped.header.frame_id = "camera_init";
+    odomAftMapped.child_frame_id = "aft_mapped";
 
-    aftMappedTrans.frame_id_ = "/camera_init";
-    aftMappedTrans.child_frame_id_ = "/aft_mapped";
+    aftMappedTrans.frame_id_ = "camera_init";
+    aftMappedTrans.child_frame_id_ = "aft_mapped";
 
-    aftMappedXYZTrans.frame_id_ = "/map";
-    aftMappedXYZTrans.child_frame_id_ = "/aft_xyz_mapped";
+    aftMappedXYZTrans.frame_id_ = "map";
+    aftMappedXYZTrans.child_frame_id_ = "aft_xyz_mapped";
 
     allocateMemory();
   }
@@ -780,8 +780,8 @@ class MappingHandler {
     geometry_msgs::Quaternion geoQuat = tf::createQuaternionMsgFromRollPitchYaw(
         transformAftMapped[2], transformAftMapped[0], transformAftMapped[1]);
 
-    odomXYZAftMapped.header.frame_id = "/map";
-    odomXYZAftMapped.child_frame_id = "/aft_xyz_mapped";
+    odomXYZAftMapped.header.frame_id = "map";
+    odomXYZAftMapped.child_frame_id = "aft_xyz_mapped";
 
     odomXYZAftMapped.header.stamp = ros::Time().fromSec(timeLaserOdometry);
     odomXYZAftMapped.pose.pose.orientation.x = geoQuat.x;
@@ -960,7 +960,7 @@ class MappingHandler {
       sensor_msgs::PointCloud2 cloudMsgTemp;
       pcl::toROSMsg(*cloudKeyPoses3D, cloudMsgTemp);
       cloudMsgTemp.header.stamp = ros::Time().fromSec(timeLaserOdometry);
-      cloudMsgTemp.header.frame_id = "/camera_init";
+      cloudMsgTemp.header.frame_id = "camera_init";
       pubKeyPoses.publish(cloudMsgTemp);
     }
 
@@ -968,7 +968,7 @@ class MappingHandler {
       sensor_msgs::PointCloud2 cloudMsgTemp;
       pcl::toROSMsg(*laserCloudSurfFromMapDS, cloudMsgTemp);
       cloudMsgTemp.header.stamp = ros::Time().fromSec(timeLaserOdometry);
-      cloudMsgTemp.header.frame_id = "/camera_init";
+      cloudMsgTemp.header.frame_id = "camera_init";
       pubRecentKeyFrames.publish(cloudMsgTemp);
     }
   }
@@ -1021,7 +1021,7 @@ class MappingHandler {
     sensor_msgs::PointCloud2 cloudMsgTemp;
     pcl::toROSMsg(*globalMapKeyFramesDS, cloudMsgTemp);
     cloudMsgTemp.header.stamp = ros::Time().fromSec(timeLaserOdometry);
-    cloudMsgTemp.header.frame_id = "/camera_init";
+    cloudMsgTemp.header.frame_id = "camera_init";
     pubLaserCloudSurround.publish(cloudMsgTemp);
 
     globalMapKeyPoses->clear();
@@ -1104,7 +1104,7 @@ class MappingHandler {
       sensor_msgs::PointCloud2 cloudMsgTemp;
       pcl::toROSMsg(*nearHistorySurfKeyFrameCloudDS, cloudMsgTemp);
       cloudMsgTemp.header.stamp = ros::Time().fromSec(timeLaserOdometry);
-      cloudMsgTemp.header.frame_id = "/camera_init";
+      cloudMsgTemp.header.frame_id = "camera_init";
       pubHistoryKeyFrames.publish(cloudMsgTemp);
     }
 
@@ -1149,7 +1149,7 @@ class MappingHandler {
       sensor_msgs::PointCloud2 cloudMsgTemp;
       pcl::toROSMsg(*closed_cloud, cloudMsgTemp);
       cloudMsgTemp.header.stamp = ros::Time().fromSec(timeLaserOdometry);
-      cloudMsgTemp.header.frame_id = "/camera_init";
+      cloudMsgTemp.header.frame_id = "camera_init";
       pubIcpKeyFrames.publish(cloudMsgTemp);
     }
 
